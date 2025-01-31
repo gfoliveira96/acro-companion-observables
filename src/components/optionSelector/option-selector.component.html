@@ -1,0 +1,13 @@
+<div class="option" (click)="selectOption(option)"
+    [class.selected-option]="(appState$ | async)?.option?.index === option.index">
+    <img [src]="option.imageUrl" class="pokemon-image">
+    <audio #audioPlayer>
+        <source [src]="option.soundUrl" type="audio/ogg">
+    </audio>
+    <span class="pokemon-name">{{ option.pokemonName }}</span>
+    <div class="type-container">
+        @for (type of option.pokemonType; track type) {
+        <span class="type-tag {{type}}">{{type}}</span>
+        }
+    </div>
+</div>

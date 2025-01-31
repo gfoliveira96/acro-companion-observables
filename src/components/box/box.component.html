@@ -1,0 +1,27 @@
+@if(appState$ | async; as appState){
+    <div>
+      <div class="center-flex">
+        <div style="width: 10px;">{{ boxIndex + 1 }}</div>
+        <div class="top-box"></div>
+      </div>
+      <div class="box" 
+        [class.different-background]="boxIndex === 8 || boxIndex === 9"
+        [class.empty-box]="!appState.options[boxIndex]"
+        [class.selected-box]="appState.boxIndex === boxIndex"
+        (click)="selectBox()">
+        @if(appState.options[boxIndex]) {
+        <div>
+          <img [src]="appState.options[boxIndex]?.imageUrl" class="box-image" />
+        </div>
+        } @else {
+        <span>Select Element</span>
+        }
+      </div>
+      <div class="center-flex" style="position: relative;">
+        <div class="bottom-box"></div>
+        <div style="position: absolute;">
+          {{ appState.options[boxIndex]?.value || '' }}
+        </div>
+      </div>
+    </div>
+    }

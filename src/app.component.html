@@ -1,0 +1,39 @@
+<div class="container wallpaper">
+  <div class="border-box">
+    <div class="center-flex">
+
+      <audio #pokemonAudio style="display: none;">
+        <source [src]="mp3Music" type="audio/mp3">
+      </audio>
+
+      @for(box of boxes; track $index) {
+      <app-box [boxIndex]="$index" />
+      }
+
+    </div>
+
+    <div style="margin-left: 30px;">
+      <button class="btn" (click)="clear()"><i class="fa fa-trash"></i></button>
+      <div>Total Value: {{ totalCount$ | async }}</div>
+    </div>
+  </div>
+
+  @if ((currentBoxIndex$ | async) !== null) {
+    <div class="border-box" style="box-shadow: none; margin-top: 50px;">
+      <div class="center-flex" style="gap: 2px;">
+  
+        @if (loader$ | async) {
+          <div class="loader-container">
+            <div class="loader"></div>
+          </div>
+        } @else {
+          <div class="options-container">
+            @for (option of options$ | async; track option.index) {
+              <app-option-selector [option]="option" />
+            }
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>
